@@ -15,7 +15,7 @@ import (
 	"github.com/zmb3/spotify"
 )
 
-const lookbackInMonths = 12
+const lookbackInMonths = 13
 
 func main() {
 	tok := obtainOAuthToken()
@@ -33,7 +33,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	likedSongs := getLikedSongs(&client, user)
+	likedSongs := getLikedSongs(&client)
 	log.Printf("looking to %d liked songs.\n", len(likedSongs))
 	monthlyPlaylists := divideSongsInMonthlyPlaylists(likedSongs)
 	createOrCompleteThePlaylists(&client, playlists, monthlyPlaylists)
@@ -144,7 +144,7 @@ func divideSongsInMonthlyPlaylists(songs []spotify.SavedTrack) map[string][]spot
 	return monthlyPlaylists
 }
 
-func getLikedSongs(client *spotify.Client, user *spotify.PrivateUser) []spotify.SavedTrack {
+func getLikedSongs(client *spotify.Client) []spotify.SavedTrack {
 	var likedSongs []spotify.SavedTrack
 	var offset int
 	var limit int
