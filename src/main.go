@@ -156,7 +156,7 @@ func getLikedSongs(client *spotify.Client, user *spotify.PrivateUser) []spotify.
 		Limit:  &limit,
 	}
 
-	log.Println("fetching liked songs. it may take a while...")
+	log.Println("fetching liked songs. this may take a while...")
 	for {
 		res, err := client.CurrentUsersTracksOpt(opts)
 		if err != nil {
